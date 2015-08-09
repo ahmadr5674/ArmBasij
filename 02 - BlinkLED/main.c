@@ -25,10 +25,20 @@ int main(void)
     asm("dsb");                         // stall instruction pipeline, until instruction completes, as
                                           //    per Errata 2.1.13, "Delay after an RCC peripheral clock enabling"
     GPIOD->MODER = (1 << 26);             // set pin 13 to be general purpose output
+    GPIOD->MODER |= (1 << 24);             // set pin 13 to be general purpose output
+    GPIOD->MODER |= (1 << 28);             // set pin 13 to be general purpose output
+    GPIOD->MODER |= (1 << 30);             // set pin 13 to be general purpose output
 
     for (;;) 
     {
-       ms_delay(500);
+        ms_delay(500);
        GPIOD->ODR ^= (1 << 13);           // Toggle the pin 
-    }
+	ms_delay(500);       
+       GPIOD->ODR ^= (1 << 12);           // Toggle the pin 
+	ms_delay(500);       
+       GPIOD->ODR ^= (1 << 14);           // Toggle the pin 
+	ms_delay(500);
+       GPIOD->ODR ^= (1 << 15);           // Toggle the pin 
+
+}
 }
