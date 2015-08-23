@@ -1,0 +1,36 @@
+#include "nushabe.h"
+#include "ui_nushabe.h"
+
+Nushabe::Nushabe(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::Nushabe)
+{
+    percentage = 50;
+    ui->setupUi(this);
+    QPushButton* up = new QPushButton("up");
+    QPushButton* down = new QPushButton("down");
+    QPushButton *close = new QPushButton("close");
+    connect(close,SIGNAL(pressed()),this,SLOT(close()));
+    QProgressBar* prog = new QProgressBar();
+    connect(up,clicked(),this,SLOT(increase_light()));
+    connect(down,clicked(),this,SLOT(deccrease_light()));
+    QWidget *mainwidget = new QWidget();
+    QHBoxLayout *hbox = new QHBoxLayout();
+    QHBoxLayout *vbox = new QHBoxLayout();
+    QHBoxLayout *hbox_layout = new QHBoxLayout();
+}
+
+Nushabe::~Nushabe()
+{
+    delete ui;
+}
+
+void Nushabe::increase_light()
+{
+    percentage = percentage + 10;
+}
+
+void Nushabe::decrease_light()
+{
+    percentage = percentage - 10;
+}
