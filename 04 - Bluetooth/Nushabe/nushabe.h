@@ -6,6 +6,9 @@
 #include <QLabel>
 #include <QProgressBar>
 #include <QDial>
+#include <QtGui>
+#include"QVBoxLayout"
+
 namespace Ui {
 class Nushabe;
 }
@@ -16,13 +19,14 @@ class Nushabe : public QMainWindow
 
 public:
     explicit Nushabe(QWidget *parent = 0);
+    QDial* dial;
+    QProgressBar* progressbar;
     ~Nushabe();
-    int percentage;
-private:
+public:
     Ui::Nushabe *ui;
-private slots:
-    void increase_light();
-    void deccrease_light();
+public slots:
+    void valueChangedSlot(int value);
+
 };
 
 #endif // NUSHABE_H
