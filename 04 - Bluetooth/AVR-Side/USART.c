@@ -23,10 +23,10 @@
 void initUSART(void) {                                /* requires BAUD */
   UBRR0H = 0x00;                        /* defined in setbaud.h */
   UBRR0L = 0x0c;
-/*#if USE_2X
-  UCSR0A |= (1 << U2X0);
-#else*/
-  UCSR0A &= ~(1 << U2X0);
+//#if USE_2X
+//  UCSR0A |= (1 << U2X0);
+//#else*/
+  //UCSR0A &= ~(1 << U2X0);
 //#endif
                                   /* Enable USART transmitter/receiver */
   UCSR0B = (1 << TXEN0) | (1 << RXEN0);
@@ -57,22 +57,27 @@ void printString(const char myString[]) {
 }
 
 void readString(char myString[], uint8_t maxLength) {
-  char response;
+  
+	//char myString[50];
+	char response;
   uint8_t i;
-  i = 0;
-  while (i < (maxLength - 1)) {                   /* prevent over-runs */
+	i = 0;
+ 	while (i < (30))
+	{
     response = receiveByte();
-    transmitByte(response);                                    /* echo */
-    if (response == '\r') {                     /* enter marks the end */
+    transmitByte(response);                                    // echo 
+    if (response == '\r') {                     // enter marks the end
       break;
     }
-    else {
-      myString[i] = response;                       /* add in a letter */
+    else 
+		{
+      myString[i] = response;                      // add in a letter
       i++;
     }
   }
-  myString[i] = 0;                          /* terminal NULL character */
+	myString[i] = 0;
 }
+
 
 void printByte(uint8_t byte) {
               /* Converts a byte to a string of decimal text, sends it */
