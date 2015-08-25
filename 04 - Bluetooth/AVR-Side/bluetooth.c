@@ -7,7 +7,7 @@
 void initBlue(void);
 
 
-void test_Read(char *myString)
+void test_Read(char myString[])
 {
 	char response;
   uint8_t i;
@@ -26,6 +26,7 @@ void test_Read(char *myString)
 	myString[i] = 0;
 	printString("\r\n");
 	printWord(i);
+	printString("\r\n");
 	printString(myString);
 	printString("\r\n");
 }

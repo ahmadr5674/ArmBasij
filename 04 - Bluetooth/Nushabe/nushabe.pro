@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2015-08-23T09:37:27
+# Project created by QtCreator 2015-08-23T11:26:03
 #
 #-------------------------------------------------
 
@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = Nushabe
+TARGET = nushabe
 TEMPLATE = app
 
 
@@ -18,3 +18,7 @@ SOURCES += main.cpp\
 HEADERS  += nushabe.h
 
 FORMS    += nushabe.ui
+
+CONFIG += mobility
+MOBILITY = 
+

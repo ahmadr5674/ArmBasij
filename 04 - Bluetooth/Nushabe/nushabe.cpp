@@ -10,8 +10,6 @@ Nushabe::Nushabe(QWidget *parent) :
     QWidget* centralWidget 	= new QWidget();
 
     dial 			= new QDial();
-    QPushButton* up = new QPushButton("up");
-    QPushButton* down = new QPushButton("down");
     progressbar = new QProgressBar();
 
 
