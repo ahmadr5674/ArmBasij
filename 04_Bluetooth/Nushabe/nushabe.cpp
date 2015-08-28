@@ -17,6 +17,12 @@ Nushabe::Nushabe(QWidget *parent) :
     centralWidget->setLayout(layout);
     resize(200, 300);
     QString localDeviceName;
+<<<<<<< HEAD
+=======
+    connect(dial,SIGNAL(sliderMoved(int)),this,SLOT(valueChangedSlot(int)));
+    //QList<QBluetoothHostInfo> host;
+    //QList<QBluetoothDeviceInfo> found_devices;
+>>>>>>> a7c2f228f0d3c33605f1d62cc51bb3ba04706c20
     if (localDevice.isValid()) {
 
         // Turn Bluetooth on
@@ -61,16 +67,19 @@ void Nushabe::startClient()
 {
     //rfcommServer->serverType();
     QString uuid("00001101-0000-1000-8000-00805F9B34FB");
-    QBluetoothSocket* socket=new QBluetoothSocket();
+    QBluetoothSocket* socket=new QBluetoothSocket(QBluetoothServiceInfo::RfcommProtocol);
     socket->connectToService(QBluetoothAddress("98:D3:31:60:30:DF"),QBluetoothUuid(uuid));
 
 
     // Connection is ready to be used
     qDebug("Debug 1");
     connect(socket, SIGNAL(connected()), this, SLOT(bt_connected()));
+<<<<<<< HEAD
     connect(socket, SIGNAL(disconnected()), this,SLOT(bt_disconnected()));
     connect(socket,SIGNAL(error(QBluetoothSocket::SocketError)),this,SLOT(error(QBluetoothSocket::SocketError)));
     qDebug() << "Create socket";
+=======
+>>>>>>> a7c2f228f0d3c33605f1d62cc51bb3ba04706c20
     qDebug() << "ConnectToService done";
 
     //connect(socket, SIGNAL(readyRead()), this, SLOT(readSocket()));
