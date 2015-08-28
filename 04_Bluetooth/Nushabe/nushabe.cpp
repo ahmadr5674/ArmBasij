@@ -47,16 +47,6 @@ void Nushabe::startDeviceDiscovery()
     QBluetoothDeviceDiscoveryAgent *discoveryAgent = new QBluetoothDeviceDiscoveryAgent(this);
     connect(discoveryAgent, SIGNAL(deviceDiscovered(QBluetoothDeviceInfo)),
             this, SLOT(deviceDiscovered(QBluetoothDeviceInfo)));
-    rfcommServer = new QBluetoothServer(QBluetoothServiceInfo::RfcommProtocol, this);
-    connect(rfcommServer, SIGNAL(newConnection()), this, SLOT(startClient()));
-    bool result = rfcommServer->listen(localDevice.address());
-    if (!result)
-    {
-        qWarning() << "Cannot bind chat server to" << localDevice.address();
-        return;
-    }
-    else
-        qDebug() << "connected " << localDevice.address();
     discoveryAgent->start();
 }
 
@@ -64,9 +54,15 @@ void Nushabe::startDeviceDiscovery()
 void Nushabe::deviceDiscovered(const QBluetoothDeviceInfo &device)
 {
     dev_list.push_back(device);
-    qDebug() << "Found new device:" << device.name() << '(' << device.address().toString() << ')' << "UUID: "
-             << device.deviceUuid();
-
+    //qDebug() << "Found new device:" << device.name() << '(' << device.address().toString() << ')' << "UUID: "
+    //         << device.deviceUuid();
+    if(device.address().toString() == "98:D3:31:60:30:DF"){
+        rfcommServer = new QBluetoothServer(QBluetoothServiceInfo::RfcommProtocol, this);
+        connect(rfcommServer, SIGNAL(newConnection()), this, SLOT(startClient()));
+        bool result = rfcommServer->listen(localDevice.address());
+        if(result)
+            qDebug() << "connected to " << device.name();
+    }
 }
 
 void Nushabe::startClient()
