@@ -17,15 +17,11 @@ Nushabe::Nushabe(QWidget *parent) :
     centralWidget->setLayout(layout);
     resize(200, 300);
     QString localDeviceName;
-    //QList<QBluetoothHostInfo> host;
-    //QList<QBluetoothDeviceInfo> found_devices;
     if (localDevice.isValid()) {
 
         // Turn Bluetooth on
         localDevice.powerOn();
         status->setText("blue is on");
-        // Read local device name
-        localDeviceName = localDevice.name();
         // Make it visible to others
         localDevice.setHostMode(QBluetoothLocalDevice::HostDiscoverable);
     }
