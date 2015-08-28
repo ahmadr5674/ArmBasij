@@ -17,12 +17,9 @@ Nushabe::Nushabe(QWidget *parent) :
     centralWidget->setLayout(layout);
     resize(200, 300);
     QString localDeviceName;
-<<<<<<< HEAD
-=======
     connect(dial,SIGNAL(sliderMoved(int)),this,SLOT(valueChangedSlot(int)));
     //QList<QBluetoothHostInfo> host;
     //QList<QBluetoothDeviceInfo> found_devices;
->>>>>>> a7c2f228f0d3c33605f1d62cc51bb3ba04706c20
     if (localDevice.isValid()) {
 
         // Turn Bluetooth on
