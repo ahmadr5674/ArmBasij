@@ -67,8 +67,9 @@ void Nushabe::startClient()
 
     // Connection is ready to be used
     qDebug("Debug 1");
-    connect(socket, SIGNAL(disconnected()), this,SLOT(bt_disconnected()) );
     connect(socket, SIGNAL(connected()), this, SLOT(bt_connected()));
+    connect(socket, SIGNAL(disconnected()), this,SLOT(bt_disconnected()));
+    connect(socket,SIGNAL(error(QBluetoothSocket::SocketError)),this,SLOT(error(QBluetoothSocket::SocketError)));
     qDebug() << "Create socket";
     qDebug() << "ConnectToService done";
 
@@ -85,4 +86,9 @@ void Nushabe :: bt_connected()
 void Nushabe :: bt_disconnected()
 {
 
+}
+
+void Nushabe :: error(QBluetoothSocket::SocketError error_code)
+{
+    qDebug() <<"error is : " << error_code;
 }
