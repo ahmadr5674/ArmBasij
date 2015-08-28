@@ -89,7 +89,8 @@ void Nushabe::startClient()
 
 void Nushabe :: bt_connected()
 {
-
+     qDebug() << "HC-05 Connected\nSending HI!";
+     socket->write("Hi\r\n");
 }
 
 void Nushabe :: bt_disconnected()
