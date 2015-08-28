@@ -64,7 +64,9 @@ void Nushabe::startDeviceDiscovery()
 void Nushabe::deviceDiscovered(const QBluetoothDeviceInfo &device)
 {
     dev_list.push_back(device);
-    qDebug() << "Found new device:" << device.name() << '(' << device.address().toString() << ')';
+    qDebug() << "Found new device:" << device.name() << '(' << device.address().toString() << ')' << "UUID: "
+             << device.deviceUuid();
+
 }
 
 void Nushabe::startClient()
@@ -72,8 +74,15 @@ void Nushabe::startClient()
     //rfcommServer->serverType();
     if (socket)
         return;
+    QString uuid("00001101-0000-1000-8000-00805F9B34FB");
+    QBluetoothSocket* socket=new QBluetoothSocket();
+    socket->connectToService(QBluetoothAddress("98:D3:31:60:30:DF"),QBluetoothUuid(uuid));
 
-    socket = rfcommServer->nextPendingConnection();
+
+    // Connection is ready to be used
+    qDebug("Connected");
+    connect(socket, &QBluetoothSocket::disconnected, this,bt_disconnected );
+    connect(socket, &QBluetoothSocket::connected, this, bt_connected);
     qDebug() << "Create socket";
     socket->connectToService(dev_list.at(0).address(),dev_list.at(0).deviceUuid());
     qDebug() << "ConnectToService done";
@@ -81,4 +90,15 @@ void Nushabe::startClient()
     connect(socket, SIGNAL(readyRead()), this, SLOT(readSocket()));
     connect(socket, SIGNAL(connected()), this, SLOT(connected()));
     connect(socket, SIGNAL(disconnected()), this, SIGNAL(disconnected()));
+}
+
+
+void Nushabe :: bt_connected()
+{
+
+}
+
+void Nushabe :: bt_disconnected()
+{
+
 }
