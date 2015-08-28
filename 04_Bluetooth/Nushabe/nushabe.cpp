@@ -70,7 +70,6 @@ void Nushabe::startClient()
     connect(socket, SIGNAL(disconnected()), this,SLOT(bt_disconnected()) );
     connect(socket, SIGNAL(connected()), this, SLOT(bt_connected()));
     qDebug() << "Create socket";
-    socket->connectToService(dev_list.at(0).address(),dev_list.at(0).deviceUuid());
     qDebug() << "ConnectToService done";
 
     //connect(socket, SIGNAL(readyRead()), this, SLOT(readSocket()));
