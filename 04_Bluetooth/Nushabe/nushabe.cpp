@@ -74,12 +74,9 @@ void Nushabe::startClient()
     // Connection is ready to be used
     qDebug("Debug 1");
     connect(socket, SIGNAL(connected()), this, SLOT(bt_connected()));
-<<<<<<< HEAD
     connect(socket, SIGNAL(disconnected()), this,SLOT(bt_disconnected()));
     connect(socket,SIGNAL(error(QBluetoothSocket::SocketError)),this,SLOT(error(QBluetoothSocket::SocketError)));
     qDebug() << "Create socket";
-=======
->>>>>>> a7c2f228f0d3c33605f1d62cc51bb3ba04706c20
     qDebug() << "ConnectToService done";
 
     //connect(socket, SIGNAL(readyRead()), this, SLOT(readSocket()));
