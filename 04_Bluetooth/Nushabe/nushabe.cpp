@@ -81,15 +81,13 @@ void Nushabe::startClient()
 
     // Connection is ready to be used
     qDebug("Connected");
-    connect(socket, &QBluetoothSocket::disconnected, this,bt_disconnected );
-    connect(socket, &QBluetoothSocket::connected, this, bt_connected);
+    connect(socket, SIGNAL(disconnected()), this,SLOT(bt_disconnected()) );
+    connect(socket, SIGNAL(connected()), this, SLOT(bt_connected()));
     qDebug() << "Create socket";
     socket->connectToService(dev_list.at(0).address(),dev_list.at(0).deviceUuid());
     qDebug() << "ConnectToService done";
 
     connect(socket, SIGNAL(readyRead()), this, SLOT(readSocket()));
-    connect(socket, SIGNAL(connected()), this, SLOT(connected()));
-    connect(socket, SIGNAL(disconnected()), this, SIGNAL(disconnected()));
 }
 
 

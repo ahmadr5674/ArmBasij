@@ -49,6 +49,8 @@ public slots:
     void startDeviceDiscovery();
     void deviceDiscovered(const QBluetoothDeviceInfo &device);
     void startClient();
+    void bt_connected();
+    void bt_disconnected();
 };
 
 #endif // NUSHABE_H
