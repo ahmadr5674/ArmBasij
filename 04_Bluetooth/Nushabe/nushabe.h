@@ -22,7 +22,7 @@
 #include <QBluetoothTransferRequest>
 #include <QBluetoothTransferManager>
 #include <QBluetoothTransferReply>
-
+#include <QVector>
 
 namespace Ui {
 class Nushabe;
@@ -40,12 +40,20 @@ public:
     QBluetoothSocket* socket;
     QBluetoothServer* rfcommServer;
     ~Nushabe();
+    QVector <QBluetoothDeviceInfo> dev_list;
+    QBluetoothLocalDevice localDevice;
+
 public:
     Ui::Nushabe *ui;
 public slots:
     void valueChangedSlot(int value);
     void startDeviceDiscovery();
     void deviceDiscovered(const QBluetoothDeviceInfo &device);
+    void startClient();
+    void bt_connected();
+    void bt_disconnected();
+    void error(QBluetoothSocket::SocketError);
+
 };
 
 #endif // NUSHABE_H
